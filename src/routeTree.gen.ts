@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordsRouteImport } from './routes/words'
+import { Route as Stage1RouteImport } from './routes/stage1'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WordsRoute = WordsRouteImport.update({
   id: '/words',
   path: '/words',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Stage1Route = Stage1RouteImport.update({
+  id: '/stage1',
+  path: '/stage1',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/stage1': typeof Stage1Route
   '/words': typeof WordsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/stage1': typeof Stage1Route
   '/words': typeof WordsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/stage1': typeof Stage1Route
   '/words': typeof WordsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/words'
+  fullPaths: '/' | '/stage1' | '/words'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/words'
-  id: '__root__' | '/' | '/words'
+  to: '/' | '/stage1' | '/words'
+  id: '__root__' | '/' | '/stage1' | '/words'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Stage1Route: typeof Stage1Route
   WordsRoute: typeof WordsRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/words'
       fullPath: '/words'
       preLoaderRoute: typeof WordsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stage1': {
+      id: '/stage1'
+      path: '/stage1'
+      fullPath: '/stage1'
+      preLoaderRoute: typeof Stage1RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Stage1Route: Stage1Route,
   WordsRoute: WordsRoute,
 }
 export const routeTree = rootRouteImport
