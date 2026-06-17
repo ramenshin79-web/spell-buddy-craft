@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppHeader } from "@/components/AppHeader";
 import { DEFAULT_WORDS, loadWords, scramble, type Word } from "@/lib/words";
-import { WorksheetHeader } from "./stage1";
+import { WorksheetHeader } from "@/components/WorksheetHeader";
 
 export const Route = createFileRoute("/stage2")({
   head: () => ({
