@@ -9,26 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WordsRouteImport } from './routes/words'
-import { Route as Stage2RouteImport } from './routes/stage2'
-import { Route as Stage1RouteImport } from './routes/stage1'
 import { Route as IndexRouteImport } from './routes/index'
 
-const WordsRoute = WordsRouteImport.update({
-  id: '/words',
-  path: '/words',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Stage2Route = Stage2RouteImport.update({
-  id: '/stage2',
-  path: '/stage2',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Stage1Route = Stage1RouteImport.update({
-  id: '/stage1',
-  path: '/stage1',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,61 +19,28 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/stage1': typeof Stage1Route
-  '/stage2': typeof Stage2Route
-  '/words': typeof WordsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/stage1': typeof Stage1Route
-  '/stage2': typeof Stage2Route
-  '/words': typeof WordsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/stage1': typeof Stage1Route
-  '/stage2': typeof Stage2Route
-  '/words': typeof WordsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/stage1' | '/stage2' | '/words'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/stage1' | '/stage2' | '/words'
-  id: '__root__' | '/' | '/stage1' | '/stage2' | '/words'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  Stage1Route: typeof Stage1Route
-  Stage2Route: typeof Stage2Route
-  WordsRoute: typeof WordsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/words': {
-      id: '/words'
-      path: '/words'
-      fullPath: '/words'
-      preLoaderRoute: typeof WordsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stage2': {
-      id: '/stage2'
-      path: '/stage2'
-      fullPath: '/stage2'
-      preLoaderRoute: typeof Stage2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stage1': {
-      id: '/stage1'
-      path: '/stage1'
-      fullPath: '/stage1'
-      preLoaderRoute: typeof Stage1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -104,9 +53,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  Stage1Route: Stage1Route,
-  Stage2Route: Stage2Route,
-  WordsRoute: WordsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
