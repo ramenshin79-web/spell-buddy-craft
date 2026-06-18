@@ -8,24 +8,13 @@ export function AppHeader() {
           <span className="text-2xl">✏️</span>
           <span className="font-display text-xl font-semibold">스펠링 놀이터</span>
         </Link>
-        <nav className="flex items-center gap-1 text-sm">
-          <NavLink to="/words" label="단어 관리" />
-          <NavLink to="/stage1" label="1단계" />
-          <NavLink to="/stage2" label="2단계" />
-        </nav>
+        <Link
+          to="/"
+          className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition hover:bg-accent hover:text-accent-foreground"
+        >
+          🏠 전체 DAY
+        </Link>
       </div>
     </header>
-  );
-}
-
-function NavLink({ to, label }: { to: string; label: string }) {
-  return (
-    <Link
-      to={to}
-      className="rounded-full px-4 py-2 font-medium text-foreground/70 transition hover:bg-accent hover:text-accent-foreground"
-      activeProps={{ className: "rounded-full px-4 py-2 font-semibold bg-primary text-primary-foreground" }}
-    >
-      {label}
-    </Link>
   );
 }
