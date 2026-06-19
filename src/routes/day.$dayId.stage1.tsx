@@ -10,9 +10,13 @@ export const Route = createFileRoute("/day/$dayId/stage1")({
   component: Stage1,
 });
 
+type SpellingMode = "blank" | "full" | "hidden";
+
 function Stage1() {
   const { dayId, day, hydrated } = useCurrentDay();
-  const [showAnswers, setShowAnswers] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
+  const [showMeaning, setShowMeaning] = useState(true);
+  const [spellingMode, setSpellingMode] = useState<SpellingMode>("blank");
   const printRef = useRef<HTMLDivElement>(null);
 
   const words = day?.words ?? [];
@@ -35,13 +39,9 @@ function Stage1() {
         <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="font-display text-3xl font-bold">🔤 {day?.name} · 1단계</h1>
-            <p className="mt-1 text-sm text-muted-foreground">뜻을 보고 비어 있는 글자를 채워서 단어를 완성해요.</p>
+            <p className="mt-1 text-sm text-muted-foreground">출력할 항목을 선택해서 워크지를 만들어요.</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <label className="flex items-center gap-2 rounded-full border-2 border-foreground/15 bg-card px-4 py-2 text-sm">
-              <input type="checkbox" checked={showAnswers} onChange={(e) => setShowAnswers(e.target.checked)} />
-              정답 보기
-            </label>
             <button onClick={() => window.print()} className="rounded-full bg-primary px-5 py-2 font-semibold text-primary-foreground shadow-[0_3px_0_oklch(0.28_0.04_280/0.2)] hover:-translate-y-0.5">
               🖨️ 인쇄
             </button>
@@ -54,6 +54,33 @@ function Stage1() {
           </div>
         </div>
 
+        {/* 출력 옵션 */}
+        <div className="no-print mb-6 rounded-2xl border-2 border-foreground/10 bg-card p-4">
+          <div className="mb-2 text-sm font-semibold text-foreground/70">출력 항목 선택</div>
+          <div className="flex flex-wrap items-center gap-4">
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={showEmoji} onChange={(e) => setShowEmoji(e.target.checked)} />
+              🖼️ 그림
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={showMeaning} onChange={(e) => setShowMeaning(e.target.checked)} />
+              📖 뜻
+            </label>
+            <div className="flex items-center gap-2 text-sm">
+              <span>🔤 알파벳:</span>
+              <select
+                value={spellingMode}
+                onChange={(e) => setSpellingMode(e.target.value as SpellingMode)}
+                className="rounded-lg border border-input bg-background px-2 py-1"
+              >
+                <option value="blank">빈칸</option>
+                <option value="full">전체 표시 (정답)</option>
+                <option value="hidden">숨김</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         <div ref={printRef}>
           <article className="worksheet-paper print-page p-8">
             <WorksheetHeader stage={`STAGE 1 · ${day?.name ?? ""}`} title="빈칸을 채워보세요 ✏️" />
@@ -62,18 +89,28 @@ function Stage1() {
                 <li key={w.id} className="rounded-2xl border border-foreground/10 bg-white/70 p-4">
                   <div className="flex items-start gap-3">
                     <span className="sticker bg-lilac">{w.id}</span>
+                    {showEmoji && (
+                      <div className="illustration-tile h-14 w-14 shrink-0 text-2xl">{w.emoji}</div>
+                    )}
                     <div className="flex-1">
-                      <div className="text-sm leading-snug text-foreground/80">
-                        <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
-                        {w.meaning}
-                      </div>
-                      <div className="mt-3">
-                        {showAnswers ? (
-                          <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
-                        ) : (
-                          <BlankSpelling spelling={w.spelling} />
-                        )}
-                      </div>
+                      {showMeaning && (
+                        <div className="text-sm leading-snug text-foreground/80">
+                          <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
+                          {w.meaning}
+                        </div>
+                      )}
+                      {spellingMode !== "hidden" && (
+                        <div className="mt-3">
+                          {spellingMode === "full" ? (
+                            <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
+                          ) : (
+                            <BlankSpelling spelling={w.spelling} />
+                          )}
+                        </div>
+                      )}
+                      {spellingMode === "hidden" && (
+                        <div className="mt-3 h-8 border-b-2 border-dashed border-foreground/20" />
+                      )}
                     </div>
                   </div>
                 </li>
