@@ -116,6 +116,17 @@ function WordsPage() {
           </table>
         </div>
 
+        {/* 출력 옵션 */}
+        <div className="no-print mt-6 rounded-2xl border-2 border-foreground/10 bg-card p-4">
+          <div className="mb-2 text-sm font-semibold text-foreground/70">출력 항목 선택</div>
+          <div className="flex flex-wrap items-center gap-4 text-sm">
+            <label className="flex items-center gap-2"><input type="checkbox" checked={showEmoji} onChange={(e) => setShowEmoji(e.target.checked)} />🖼️ 그림</label>
+            <label className="flex items-center gap-2"><input type="checkbox" checked={showSpelling} onChange={(e) => setShowSpelling(e.target.checked)} />🔤 알파벳</label>
+            <label className="flex items-center gap-2"><input type="checkbox" checked={showPos} onChange={(e) => setShowPos(e.target.checked)} />🏷️ 품사</label>
+            <label className="flex items-center gap-2"><input type="checkbox" checked={showMeaning} onChange={(e) => setShowMeaning(e.target.checked)} />📖 뜻</label>
+          </div>
+        </div>
+
         {/* 인쇄/저장용 예쁜 단어 목록 */}
         <div ref={printRef} className="mt-8">
           <article className="worksheet-paper print-page p-8">
@@ -129,14 +140,22 @@ function WordsPage() {
             <ol className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {words.map((w) => (
                 <li key={w.id} className="flex gap-3 rounded-2xl border border-foreground/10 bg-white/70 p-3">
-                  <div className="illustration-tile h-16 w-16 shrink-0 text-3xl">{w.emoji}</div>
+                  {showEmoji && (
+                    <div className="illustration-tile h-16 w-16 shrink-0 text-3xl">{w.emoji}</div>
+                  )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="sticker bg-lilac">{w.id}</span>
-                      <span className="font-mono text-lg font-bold text-primary">{w.spelling}</span>
-                      <span className="text-xs text-foreground/60">[{w.pos}]</span>
+                      {showSpelling && (
+                        <span className="font-mono text-lg font-bold text-primary truncate">{w.spelling}</span>
+                      )}
+                      {showPos && (
+                        <span className="text-xs text-foreground/60">[{w.pos}]</span>
+                      )}
                     </div>
-                    <p className="mt-1 text-sm leading-snug text-foreground/80">{w.meaning}</p>
+                    {showMeaning && (
+                      <p className="mt-1 text-sm leading-snug text-foreground/80">{w.meaning}</p>
+                    )}
                   </div>
                 </li>
               ))}
