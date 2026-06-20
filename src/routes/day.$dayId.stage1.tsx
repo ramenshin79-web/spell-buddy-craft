@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { AppHeader } from "@/components/AppHeader";
-import { makeBlankPattern } from "@/lib/words";
+import { makeBlankPattern, makeBlankPatternSeeded } from "@/lib/words";
 import { WorksheetHeader } from "@/components/WorksheetHeader";
 import { useCurrentDay, DaySubNav } from "./day.$dayId";
 import { downloadElementAsHtml } from "@/lib/exportHtml";
