@@ -17,6 +17,7 @@ function Stage1() {
   const [showEmoji, setShowEmoji] = useState(false);
   const [showMeaning, setShowMeaning] = useState(true);
   const [spellingMode, setSpellingMode] = useState<SpellingMode>("blank");
+  const [blankSeed, setBlankSeed] = useState(0);
   const printRef = useRef<HTMLDivElement>(null);
 
   const words = day?.words ?? [];
