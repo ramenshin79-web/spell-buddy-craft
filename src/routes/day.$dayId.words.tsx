@@ -14,6 +14,10 @@ const EMOJI_SUGGESTIONS = ["🔧","🌳","⚰️","🕳️","🛠️","🔴","�
 function WordsPage() {
   const { dayId, day, hydrated } = useCurrentDay();
   const [words, setWords] = useState<Word[]>([]);
+  const [showEmoji, setShowEmoji] = useState(true);
+  const [showSpelling, setShowSpelling] = useState(true);
+  const [showMeaning, setShowMeaning] = useState(true);
+  const [showPos, setShowPos] = useState(true);
   const printRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
