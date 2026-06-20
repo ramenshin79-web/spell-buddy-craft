@@ -155,15 +155,15 @@ function FitRow({ length, children }: { length: number; children: React.ReactNod
   );
 }
 
-function BlankSpelling({ spelling }: { spelling: string }) {
-  const pattern = makeBlankPattern(spelling);
+function BlankSpelling({ spelling, pattern }: { spelling: string; pattern?: string[] }) {
+  const chars = pattern ?? makeBlankPattern(spelling);
   const scale = fitScale(spelling.length);
   return (
     <div
       className="flex flex-nowrap items-end gap-0.5 whitespace-nowrap overflow-hidden"
       style={{ fontSize: `${scale}em` }}
     >
-      {pattern.map((ch, i) => {
+      {chars.map((ch, i) => {
         if (ch === " ") return <span key={i} className="w-3" />;
         const isBlank = ch === "_";
         return (
