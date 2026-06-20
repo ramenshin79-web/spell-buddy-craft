@@ -78,6 +78,15 @@ function Stage1() {
                 <option value="full">전체 표시 (정답)</option>
                 <option value="hidden">숨김</option>
               </select>
+              {spellingMode === "blank" && (
+                <button
+                  onClick={() => setBlankSeed((s) => s + 1)}
+                  className="ml-1 rounded-lg border border-foreground/15 bg-background px-2 py-1 text-xs hover:bg-muted"
+                  title="빈칸 위치를 다시 뒤섞어요"
+                >
+                  🔄 뒤섞기
+                </button>
+              )}
             </div>
           </div>
         </div>
