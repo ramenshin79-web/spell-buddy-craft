@@ -102,7 +102,9 @@ function Stage1() {
                       {spellingMode !== "hidden" && (
                         <div className="mt-3">
                           {spellingMode === "full" ? (
-                            <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
+                            <FitRow length={w.spelling.length}>
+                              <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
+                            </FitRow>
                           ) : (
                             <BlankSpelling spelling={w.spelling} />
                           )}
@@ -123,10 +125,28 @@ function Stage1() {
   );
 }
 
+function fitScale(len: number, threshold = 8) {
+  if (len <= threshold) return 1;
+  return Math.max(0.45, threshold / len);
+}
+
+function FitRow({ length, children }: { length: number; children: React.ReactNode }) {
+  const scale = fitScale(length);
+  return (
+    <div className="whitespace-nowrap overflow-hidden" style={{ fontSize: `${scale}em` }}>
+      {children}
+    </div>
+  );
+}
+
 function BlankSpelling({ spelling }: { spelling: string }) {
   const pattern = makeBlankPattern(spelling);
+  const scale = fitScale(spelling.length);
   return (
-    <div className="flex flex-wrap items-end gap-0.5">
+    <div
+      className="flex flex-nowrap items-end gap-0.5 whitespace-nowrap overflow-hidden"
+      style={{ fontSize: `${scale}em` }}
+    >
       {pattern.map((ch, i) => {
         if (ch === " ") return <span key={i} className="w-3" />;
         const isBlank = ch === "_";
