@@ -325,6 +325,36 @@ export function makeBlankPattern(spelling: string): string[] {
   });
 }
 
+export function makeBlankPatternSeeded(spelling: string, seed: number): string[] {
+  const chars = spelling.split("");
+  const letters: { idx: number; ch: string }[] = [];
+  chars.forEach((ch, idx) => {
+    if (/[a-zA-Z]/.test(ch)) letters.push({ idx, ch });
+  });
+  if (letters.length <= 2) {
+    return chars.map((ch) => (/[a-zA-Z]/.test(ch) ? "_" : ch));
+  }
+  // seeded PRNG
+  let s = seed + spelling.length * 31 + 12345;
+  const rand = () => {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+  // shuffle letter indices to decide which ones to show vs blank
+  const indices = letters.map((l) => l.idx);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  // show first letter + ~half of the rest
+  const showCount = Math.max(1, Math.ceil(letters.length * 0.45));
+  const showSet = new Set(indices.slice(0, showCount));
+  return chars.map((ch, idx) => {
+    if (!/[a-zA-Z]/.test(ch)) return ch;
+    return showSet.has(idx) ? ch : "_";
+  });
+}
+
 // 단계 2: 글자 섞기
 export function scramble(spelling: string, seed = 1): string {
   const words = spelling.split(" ");

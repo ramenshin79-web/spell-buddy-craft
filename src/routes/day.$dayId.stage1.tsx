@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { AppHeader } from "@/components/AppHeader";
-import { makeBlankPattern } from "@/lib/words";
+import { makeBlankPattern, makeBlankPatternSeeded } from "@/lib/words";
 import { WorksheetHeader } from "@/components/WorksheetHeader";
 import { useCurrentDay, DaySubNav } from "./day.$dayId";
 import { downloadElementAsHtml } from "@/lib/exportHtml";
@@ -17,6 +17,7 @@ function Stage1() {
   const [showEmoji, setShowEmoji] = useState(false);
   const [showMeaning, setShowMeaning] = useState(true);
   const [spellingMode, setSpellingMode] = useState<SpellingMode>("blank");
+  const [blankSeed, setBlankSeed] = useState(0);
   const printRef = useRef<HTMLDivElement>(null);
 
   const words = day?.words ?? [];
@@ -77,6 +78,15 @@ function Stage1() {
                 <option value="full">전체 표시 (정답)</option>
                 <option value="hidden">숨김</option>
               </select>
+              {spellingMode === "blank" && (
+                <button
+                  onClick={() => setBlankSeed((s) => s + 1)}
+                  className="ml-1 rounded-lg border border-foreground/15 bg-background px-2 py-1 text-xs hover:bg-muted"
+                  title="빈칸 위치를 다시 뒤섞어요"
+                >
+                  🔄 뒤섞기
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -85,38 +95,44 @@ function Stage1() {
           <article className="worksheet-paper print-page p-8">
             <WorksheetHeader stage={`STAGE 1 · ${day?.name ?? ""}`} title="빈칸을 채워보세요 ✏️" />
             <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {words.map((w) => (
-                <li key={w.id} className="rounded-2xl border border-foreground/10 bg-white/70 p-4">
-                  <div className="flex items-start gap-3">
-                    <span className="sticker bg-lilac">{w.id}</span>
-                    {showEmoji && (
-                      <div className="illustration-tile h-14 w-14 shrink-0 text-2xl">{w.emoji}</div>
-                    )}
-                    <div className="flex-1">
-                      {showMeaning && (
-                        <div className="text-sm leading-snug text-foreground/80">
-                          <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
-                          {w.meaning}
-                        </div>
+              {words.map((w) => {
+                const pattern =
+                  blankSeed === 0
+                    ? makeBlankPattern(w.spelling)
+                    : makeBlankPatternSeeded(w.spelling, blankSeed);
+                return (
+                  <li key={w.id} className="rounded-2xl border border-foreground/10 bg-white/70 p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="sticker bg-lilac">{w.id}</span>
+                      {showEmoji && (
+                        <div className="illustration-tile h-14 w-14 shrink-0 text-2xl">{w.emoji}</div>
                       )}
-                      {spellingMode !== "hidden" && (
-                        <div className="mt-3">
-                          {spellingMode === "full" ? (
-                            <FitRow length={w.spelling.length}>
-                              <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
-                            </FitRow>
-                          ) : (
-                            <BlankSpelling spelling={w.spelling} />
-                          )}
-                        </div>
-                      )}
-                      {spellingMode === "hidden" && (
-                        <div className="mt-3 h-8 border-b-2 border-dashed border-foreground/20" />
-                      )}
+                      <div className="flex-1">
+                        {showMeaning && (
+                          <div className="text-sm leading-snug text-foreground/80">
+                            <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
+                            {w.meaning}
+                          </div>
+                        )}
+                        {spellingMode !== "hidden" && (
+                          <div className="mt-3">
+                            {spellingMode === "full" ? (
+                              <FitRow length={w.spelling.length}>
+                                <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
+                              </FitRow>
+                            ) : (
+                              <BlankSpelling spelling={w.spelling} pattern={pattern} />
+                            )}
+                          </div>
+                        )}
+                        {spellingMode === "hidden" && (
+                          <div className="mt-3 h-8 border-b-2 border-dashed border-foreground/20" />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ol>
           </article>
         </div>
@@ -139,15 +155,15 @@ function FitRow({ length, children }: { length: number; children: React.ReactNod
   );
 }
 
-function BlankSpelling({ spelling }: { spelling: string }) {
-  const pattern = makeBlankPattern(spelling);
+function BlankSpelling({ spelling, pattern }: { spelling: string; pattern?: string[] }) {
+  const chars = pattern ?? makeBlankPattern(spelling);
   const scale = fitScale(spelling.length);
   return (
     <div
       className="flex flex-nowrap items-end gap-0.5 whitespace-nowrap overflow-hidden"
       style={{ fontSize: `${scale}em` }}
     >
-      {pattern.map((ch, i) => {
+      {chars.map((ch, i) => {
         if (ch === " ") return <span key={i} className="w-3" />;
         const isBlank = ch === "_";
         return (
