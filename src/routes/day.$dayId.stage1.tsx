@@ -95,38 +95,44 @@ function Stage1() {
           <article className="worksheet-paper print-page p-8">
             <WorksheetHeader stage={`STAGE 1 · ${day?.name ?? ""}`} title="빈칸을 채워보세요 ✏️" />
             <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {words.map((w) => (
-                <li key={w.id} className="rounded-2xl border border-foreground/10 bg-white/70 p-4">
-                  <div className="flex items-start gap-3">
-                    <span className="sticker bg-lilac">{w.id}</span>
-                    {showEmoji && (
-                      <div className="illustration-tile h-14 w-14 shrink-0 text-2xl">{w.emoji}</div>
-                    )}
-                    <div className="flex-1">
-                      {showMeaning && (
-                        <div className="text-sm leading-snug text-foreground/80">
-                          <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
-                          {w.meaning}
-                        </div>
+              {words.map((w) => {
+                const pattern =
+                  blankSeed === 0
+                    ? makeBlankPattern(w.spelling)
+                    : makeBlankPatternSeeded(w.spelling, blankSeed);
+                return (
+                  <li key={w.id} className="rounded-2xl border border-foreground/10 bg-white/70 p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="sticker bg-lilac">{w.id}</span>
+                      {showEmoji && (
+                        <div className="illustration-tile h-14 w-14 shrink-0 text-2xl">{w.emoji}</div>
                       )}
-                      {spellingMode !== "hidden" && (
-                        <div className="mt-3">
-                          {spellingMode === "full" ? (
-                            <FitRow length={w.spelling.length}>
-                              <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
-                            </FitRow>
-                          ) : (
-                            <BlankSpelling spelling={w.spelling} />
-                          )}
-                        </div>
-                      )}
-                      {spellingMode === "hidden" && (
-                        <div className="mt-3 h-8 border-b-2 border-dashed border-foreground/20" />
-                      )}
+                      <div className="flex-1">
+                        {showMeaning && (
+                          <div className="text-sm leading-snug text-foreground/80">
+                            <span className="mr-1 font-semibold">[{shortPos(w.pos)}]</span>
+                            {w.meaning}
+                          </div>
+                        )}
+                        {spellingMode !== "hidden" && (
+                          <div className="mt-3">
+                            {spellingMode === "full" ? (
+                              <FitRow length={w.spelling.length}>
+                                <span className="spell-cell" style={{ color: "var(--primary)" }}>{w.spelling}</span>
+                              </FitRow>
+                            ) : (
+                              <BlankSpelling spelling={w.spelling} pattern={pattern} />
+                            )}
+                          </div>
+                        )}
+                        {spellingMode === "hidden" && (
+                          <div className="mt-3 h-8 border-b-2 border-dashed border-foreground/20" />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ol>
           </article>
         </div>
