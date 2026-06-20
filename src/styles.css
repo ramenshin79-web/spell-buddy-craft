@@ -145,9 +145,35 @@
   aspect-ratio: 1;
 }
 
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
 @media print {
-  body { background: white !important; }
+  html, body { background: white !important; }
   .no-print { display: none !important; }
+
+  /* 페이지 컨테이너 여백 제거 */
+  main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+
   .worksheet-paper { box-shadow: none !important; border-radius: 0 !important; }
-  .print-page { page-break-after: always; }
+
+  /* 각 워크지를 정확히 A4 한 장에 맞춤 */
+  .print-page {
+    width: 190mm;   /* A4 210mm - 좌우 margin 10mm*2 */
+    height: 277mm;  /* A4 297mm - 상하 margin 10mm*2 */
+    box-sizing: border-box;
+    padding: 8mm !important;
+    margin: 0 !important;
+    overflow: hidden;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+  }
+  .print-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
 }
