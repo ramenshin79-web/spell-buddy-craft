@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DayDayIdRouteImport } from './routes/day.$dayId'
 import { Route as DayDayIdIndexRouteImport } from './routes/day.$dayId.index'
 import { Route as DayDayIdWordsRouteImport } from './routes/day.$dayId.words'
+import { Route as DayDayIdWordlistRouteImport } from './routes/day.$dayId.wordlist'
 import { Route as DayDayIdStage2RouteImport } from './routes/day.$dayId.stage2'
 import { Route as DayDayIdStage1RouteImport } from './routes/day.$dayId.stage1'
 
@@ -36,6 +37,11 @@ const DayDayIdWordsRoute = DayDayIdWordsRouteImport.update({
   path: '/words',
   getParentRoute: () => DayDayIdRoute,
 } as any)
+const DayDayIdWordlistRoute = DayDayIdWordlistRouteImport.update({
+  id: '/wordlist',
+  path: '/wordlist',
+  getParentRoute: () => DayDayIdRoute,
+} as any)
 const DayDayIdStage2Route = DayDayIdStage2RouteImport.update({
   id: '/stage2',
   path: '/stage2',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/day/$dayId': typeof DayDayIdRouteWithChildren
   '/day/$dayId/stage1': typeof DayDayIdStage1Route
   '/day/$dayId/stage2': typeof DayDayIdStage2Route
+  '/day/$dayId/wordlist': typeof DayDayIdWordlistRoute
   '/day/$dayId/words': typeof DayDayIdWordsRoute
   '/day/$dayId/': typeof DayDayIdIndexRoute
 }
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/day/$dayId/stage1': typeof DayDayIdStage1Route
   '/day/$dayId/stage2': typeof DayDayIdStage2Route
+  '/day/$dayId/wordlist': typeof DayDayIdWordlistRoute
   '/day/$dayId/words': typeof DayDayIdWordsRoute
   '/day/$dayId': typeof DayDayIdIndexRoute
 }
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/day/$dayId': typeof DayDayIdRouteWithChildren
   '/day/$dayId/stage1': typeof DayDayIdStage1Route
   '/day/$dayId/stage2': typeof DayDayIdStage2Route
+  '/day/$dayId/wordlist': typeof DayDayIdWordlistRoute
   '/day/$dayId/words': typeof DayDayIdWordsRoute
   '/day/$dayId/': typeof DayDayIdIndexRoute
 }
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/day/$dayId'
     | '/day/$dayId/stage1'
     | '/day/$dayId/stage2'
+    | '/day/$dayId/wordlist'
     | '/day/$dayId/words'
     | '/day/$dayId/'
   fileRoutesByTo: FileRoutesByTo
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/day/$dayId/stage1'
     | '/day/$dayId/stage2'
+    | '/day/$dayId/wordlist'
     | '/day/$dayId/words'
     | '/day/$dayId'
   id:
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '/day/$dayId'
     | '/day/$dayId/stage1'
     | '/day/$dayId/stage2'
+    | '/day/$dayId/wordlist'
     | '/day/$dayId/words'
     | '/day/$dayId/'
   fileRoutesById: FileRoutesById
@@ -132,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DayDayIdWordsRouteImport
       parentRoute: typeof DayDayIdRoute
     }
+    '/day/$dayId/wordlist': {
+      id: '/day/$dayId/wordlist'
+      path: '/wordlist'
+      fullPath: '/day/$dayId/wordlist'
+      preLoaderRoute: typeof DayDayIdWordlistRouteImport
+      parentRoute: typeof DayDayIdRoute
+    }
     '/day/$dayId/stage2': {
       id: '/day/$dayId/stage2'
       path: '/stage2'
@@ -152,6 +171,7 @@ declare module '@tanstack/react-router' {
 interface DayDayIdRouteChildren {
   DayDayIdStage1Route: typeof DayDayIdStage1Route
   DayDayIdStage2Route: typeof DayDayIdStage2Route
+  DayDayIdWordlistRoute: typeof DayDayIdWordlistRoute
   DayDayIdWordsRoute: typeof DayDayIdWordsRoute
   DayDayIdIndexRoute: typeof DayDayIdIndexRoute
 }
@@ -159,6 +179,7 @@ interface DayDayIdRouteChildren {
 const DayDayIdRouteChildren: DayDayIdRouteChildren = {
   DayDayIdStage1Route: DayDayIdStage1Route,
   DayDayIdStage2Route: DayDayIdStage2Route,
+  DayDayIdWordlistRoute: DayDayIdWordlistRoute,
   DayDayIdWordsRoute: DayDayIdWordsRoute,
   DayDayIdIndexRoute: DayDayIdIndexRoute,
 }

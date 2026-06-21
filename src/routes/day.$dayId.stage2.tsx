@@ -59,34 +59,43 @@ function Stage2() {
         </div>
 
         <div ref={printRef}>
-          <article className="worksheet-paper print-page p-8">
-            <WorksheetHeader stage={`STAGE 2 · ${day?.name ?? ""}`} title="그림 보고 철자를 바로 써요 🎨" />
-            <ol className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {words.map((w) => (
-                <li key={w.id} className="flex gap-4 rounded-2xl border border-foreground/10 bg-white/70 p-4">
-                  <div className="illustration-tile h-24 w-24 shrink-0 text-4xl">{w.emoji}</div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="sticker bg-mint">{w.id}</span>
-                      <span className="text-xs font-semibold text-foreground/60">[{w.pos}]</span>
-                    </div>
-                    <p className="mt-1 text-sm leading-snug text-foreground/80">{w.meaning}</p>
-                    <div className="mt-2 inline-block rounded-lg bg-lemon px-2 py-1 font-mono text-sm tracking-widest text-foreground/70">
-                      {scramble(w.spelling, seed)}
-                    </div>
-                    <div className="mt-2 flex items-baseline gap-2">
-                      <span className="text-xs text-muted-foreground">→</span>
-                      {showAnswers ? (
-                        <span className="font-mono text-lg font-bold text-primary">{w.spelling}</span>
-                      ) : (
-                        <span className="block h-7 flex-1 border-b-2 border-foreground/30" />
-                      )}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </article>
+          {(() => {
+            const mid = Math.ceil(words.length / 2);
+            const chunks = [words.slice(0, mid), words.slice(mid)];
+            return chunks.map((chunk, idx) => (
+              <article key={idx} className="worksheet-paper print-page print-fit-2 mb-8 p-8">
+                <WorksheetHeader
+                  stage={`STAGE 2 · ${day?.name ?? ""} (${idx + 1}/${chunks.length})`}
+                  title="그림 보고 철자를 바로 써요 🎨"
+                />
+                <ol className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  {chunk.map((w) => (
+                    <li key={w.id} className="flex gap-4 rounded-2xl border border-foreground/10 bg-white/70 p-4">
+                      <div className="illustration-tile h-24 w-24 shrink-0 text-4xl">{w.emoji}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="sticker bg-mint">{w.id}</span>
+                          <span className="text-xs font-semibold text-foreground/60">[{w.pos}]</span>
+                        </div>
+                        <p className="mt-1 text-sm leading-snug text-foreground/80">{w.meaning}</p>
+                        <div className="mt-2 inline-block rounded-lg bg-lemon px-2 py-1 font-mono text-sm tracking-widest text-foreground/70">
+                          {scramble(w.spelling, seed)}
+                        </div>
+                        <div className="mt-2 flex items-baseline gap-2">
+                          <span className="text-xs text-muted-foreground">→</span>
+                          {showAnswers ? (
+                            <span className="font-mono text-lg font-bold text-primary">{w.spelling}</span>
+                          ) : (
+                            <span className="block h-7 flex-1 border-b-2 border-foreground/30" />
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            ));
+          })()}
         </div>
       </main>
     </div>

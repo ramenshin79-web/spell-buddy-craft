@@ -92,7 +92,7 @@ function Stage1() {
         </div>
 
         <div ref={printRef}>
-          <article className="worksheet-paper print-page p-8">
+          <article className="worksheet-paper print-page print-fit-1 p-8">
             <WorksheetHeader stage={`STAGE 1 · ${day?.name ?? ""}`} title="빈칸을 채워보세요 ✏️" />
             <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {words.map((w) => {
