@@ -159,21 +159,24 @@
 
   .worksheet-paper { box-shadow: none !important; border-radius: 0 !important; }
 
-  /* 각 워크지를 정확히 A4 한 장에 맞춤 */
+  /* 워크지 컨테이너: A4 너비에 맞추고, 내용이 길면 자연스럽게 다음 페이지로 흐름 */
   .print-page {
     width: 190mm;   /* A4 210mm - 좌우 margin 10mm*2 */
-    height: 277mm;  /* A4 297mm - 상하 margin 10mm*2 */
     box-sizing: border-box;
     padding: 8mm !important;
     margin: 0 !important;
-    overflow: hidden;
-    page-break-after: always;
-    page-break-inside: avoid;
-    break-after: page;
-    break-inside: avoid;
   }
-  .print-page:last-child {
-    page-break-after: auto;
-    break-after: auto;
+  /* 여러 개의 .print-page가 있으면 각각 새 페이지에서 시작 */
+  .print-page + .print-page {
+    page-break-before: always;
+    break-before: page;
+  }
+  /* 페이지 내부에서 카드/행이 잘리지 않도록 */
+  .print-page .print-item,
+  .print-page article,
+  .print-page li,
+  .print-page tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 }
