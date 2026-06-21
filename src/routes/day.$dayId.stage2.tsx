@@ -65,7 +65,7 @@ function Stage2() {
             return chunks.map((chunk, idx) => (
               <article key={idx} className="worksheet-paper print-page print-fit-2 mb-8 p-8">
                 <WorksheetHeader
-                  stage={`STAGE 2 · ${day?.name ?? ""}${chunks[1].length > 0 ? ` (${idx + 1}/${chunks[1].length > 0 ? 2 : 1})` : ""}`}
+                  stage={`STAGE 2 · ${day?.name ?? ""} (${idx + 1}/${chunks.length})`}
                   title="그림 보고 철자를 바로 써요 🎨"
                 />
                 <ol className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
