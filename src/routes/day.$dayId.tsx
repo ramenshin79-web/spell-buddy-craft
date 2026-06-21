@@ -25,6 +25,12 @@ export function useCurrentDay() {
   return { dayId, day, setDay, hydrated };
 }
 
+type SubPath =
+  | "/day/$dayId/words"
+  | "/day/$dayId/wordlist"
+  | "/day/$dayId/stage1"
+  | "/day/$dayId/stage2";
+
 export function DaySubNav({ dayId, dayName }: { dayId: string; dayName: string }) {
   return (
     <div className="no-print mb-4 flex flex-wrap items-center gap-2 text-sm">
@@ -38,8 +44,9 @@ export function DaySubNav({ dayId, dayName }: { dayId: string; dayName: string }
         {dayName}
       </Link>
       <span className="text-foreground/40">/</span>
-      <nav className="flex gap-1">
-        <SubLink to="/day/$dayId/words" dayId={dayId} label="단어 관리" />
+      <nav className="flex flex-wrap gap-1">
+        <SubLink to="/day/$dayId/words" dayId={dayId} label="단어목록" />
+        <SubLink to="/day/$dayId/wordlist" dayId={dayId} label="워드리스트" />
         <SubLink to="/day/$dayId/stage1" dayId={dayId} label="1단계" />
         <SubLink to="/day/$dayId/stage2" dayId={dayId} label="2단계" />
       </nav>
@@ -47,7 +54,7 @@ export function DaySubNav({ dayId, dayName }: { dayId: string; dayName: string }
   );
 }
 
-function SubLink({ to, dayId, label }: { to: "/day/$dayId/words" | "/day/$dayId/stage1" | "/day/$dayId/stage2"; dayId: string; label: string }) {
+function SubLink({ to, dayId, label }: { to: SubPath; dayId: string; label: string }) {
   return (
     <Link
       to={to}
