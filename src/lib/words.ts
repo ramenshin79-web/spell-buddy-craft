@@ -276,7 +276,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-11",
     name: "DAY 11",
-    words: [,
+    words: [
     { id: "0201", spelling: "solar", pos: "형", meaning: "태양의, 태양에 관한", emoji: "☀️" },
     { id: "0202", spelling: "captain", pos: "명", meaning: "1 선장, 기장 2 (팀의) 주장", emoji: "🧑‍✈️" },
     { id: "0203", spelling: "dialogue", pos: "명", meaning: "(소설 · 영화 등의) 대화, 회화", emoji: "💬" },
@@ -302,7 +302,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-12",
     name: "DAY 12",
-    words: [,
+    words: [
     { id: "0221", spelling: "save", pos: "동", meaning: "1 (위험으로부터) 구하다 2 (돈을) 저축하다 3 (자원을) 절약하다", emoji: "💾" },
     { id: "0222", spelling: "cause", pos: "명/동", meaning: "명 원인 동 ~의 원인이 되다, 일으키다", emoji: "🎯" },
     { id: "0223", spelling: "exercise", pos: "명/동", meaning: "명 1 운동 2 훈련, 연습 동 운동하다", emoji: "🏋️" },
@@ -328,7 +328,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-13",
     name: "DAY 13",
-    words: [,
+    words: [
     { id: "0241", spelling: "effect", pos: "명", meaning: "영향, 결과", emoji: "💥" },
     { id: "0242", spelling: "focus", pos: "동", meaning: "집중하다, 집중시키다", emoji: "🎯" },
     { id: "0243", spelling: "dictionary", pos: "명", meaning: "사전", emoji: "📖" },
@@ -354,7 +354,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-14",
     name: "DAY 14",
-    words: [,
+    words: [
     { id: "0261", spelling: "rise", pos: "동", meaning: "1 오르다, 상승하다 2 일어나다 3 (해 · 달이) 뜨다", emoji: "📈" },
     { id: "0262", spelling: "accept", pos: "동", meaning: "받아들이다, 수락하다", emoji: "🤝" },
     { id: "0263", spelling: "topic", pos: "명", meaning: "주제, 화제", emoji: "💬" },
@@ -380,7 +380,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-15",
     name: "DAY 15",
-    words: [,
+    words: [
     { id: "0281", spelling: "own", pos: "형/동", meaning: "형 자기 자신의 동 소유하다", emoji: "🪪" },
     { id: "0282", spelling: "praise", pos: "동/명", meaning: "동 칭찬하다 명 칭찬, 찬양", emoji: "👏" },
     { id: "0283", spelling: "continue", pos: "동", meaning: "계속되다, 계속하다", emoji: "➡️" },
@@ -406,7 +406,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-16",
     name: "DAY 16",
-    words: [,
+    words: [
     { id: "0301", spelling: "sign", pos: "명/동", meaning: "명 1 표지판 2 기미, 조짐 동 서명하다", emoji: "🪧" },
     { id: "0302", spelling: "branch", pos: "명", meaning: "1 나뭇가지 2 지점, 지사", emoji: "🌿" },
     { id: "0303", spelling: "reach", pos: "동", meaning: "1 도달하다 2 (손이) 닿다", emoji: "🤲" },
@@ -432,7 +432,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-17",
     name: "DAY 17",
-    words: [,
+    words: [
     { id: "0321", spelling: "judge", pos: "명/동", meaning: "명 1 판사 2 심판, 심사위원 동 판단하다, 평가하다", emoji: "⚖️" },
     { id: "0322", spelling: "agree", pos: "동", meaning: "동의하다", emoji: "👍" },
     { id: "0323", spelling: "basic", pos: "형", meaning: "기본적인, 기초적인 명 기본, 기초", emoji: "🔤" },
@@ -458,7 +458,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-18",
     name: "DAY 18",
-    words: [,
+    words: [
     { id: "0341", spelling: "fry", pos: "동", meaning: "(기름에) 튀기다, 볶다", emoji: "🍳" },
     { id: "0342", spelling: "habit", pos: "명", meaning: "버릇, 습관", emoji: "🔁" },
     { id: "0343", spelling: "tax", pos: "명", meaning: "세금", emoji: "💸" },
@@ -484,7 +484,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-19",
     name: "DAY 19",
-    words: [,
+    words: [
     { id: "0361", spelling: "sale", pos: "명", meaning: "1 판매 2 할인 판매, 세일", emoji: "🏷️" },
     { id: "0362", spelling: "metal", pos: "명", meaning: "금속", emoji: "⛓️" },
     { id: "0363", spelling: "complete", pos: "형/동", meaning: "형 완전한, 완벽한 동 1 완수하다 2 완성하다", emoji: "✅" },
@@ -510,7 +510,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-20",
     name: "DAY 20",
-    words: [,
+    words: [
     { id: "0381", spelling: "base", pos: "명/동", meaning: "명 1 맨 아랫부분, 밑바닥 2 바닥 동 기초, 기반", emoji: "🏗️" },
     { id: "0382", spelling: "grade", pos: "명", meaning: "1 등급 2 학년 3 성적", emoji: "🏅" },
     { id: "0383", spelling: "signal", pos: "명", meaning: "신호", emoji: "🚦" },
@@ -536,7 +536,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-21",
     name: "DAY 21",
-    words: [,
+    words: [
     { id: "0401", spelling: "bill", pos: "명", meaning: "1 고지서, 청구서 2 지폐", emoji: "🧾" },
     { id: "0402", spelling: "cough", pos: "동/명", meaning: "동 기침하다 명 기침", emoji: "😷" },
     { id: "0403", spelling: "image", pos: "명", meaning: "1 이미지, 인상 2 (거울 등에 비친) 상(像), 모습", emoji: "🖼️" },
@@ -562,7 +562,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-22",
     name: "DAY 22",
-    words: [,
+    words: [
     { id: "0421", spelling: "breathe", pos: "동", meaning: "숨 쉬다, 호흡하다", emoji: "🌬️" },
     { id: "0422", spelling: "gain", pos: "동", meaning: "1 (노력해서) 얻다 2 (체중 등이) 늘다, (경험 등을) 쌓다", emoji: "📈" },
     { id: "0423", spelling: "fit", pos: "동/형", meaning: "동 1 꼭 맞다 2 적합하다, 어울리다 형 건강한", emoji: "💪" },
@@ -588,7 +588,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-23",
     name: "DAY 23",
-    words: [,
+    words: [
     { id: "0441", spelling: "bite", pos: "동/명", meaning: "동 물다 명 1 한 입 2 물린 상처", emoji: "🦷" },
     { id: "0442", spelling: "society", pos: "명", meaning: "1 사회 2 협회, 학회, 단체", emoji: "🏛️" },
     { id: "0443", spelling: "title", pos: "명", meaning: "제목, 표제", emoji: "🏷️" },
@@ -614,7 +614,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-24",
     name: "DAY 24",
-    words: [,
+    words: [
     { id: "0461", spelling: "hug", pos: "동/명", meaning: "동 껴안다, 포옹하다 명 껴안기, 포옹", emoji: "🤗" },
     { id: "0462", spelling: "vision", pos: "명", meaning: "1 시력 2 전망, 비전", emoji: "👁️" },
     { id: "0463", spelling: "century", pos: "명", meaning: "1 세기 2 100년", emoji: "📅" },
@@ -640,7 +640,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-25",
     name: "DAY 25",
-    words: [,
+    words: [
     { id: "0481", spelling: "huge", pos: "형", meaning: "1 (크기가) 거대한 2 (수량 · 정도가) 막대한", emoji: "🐘" },
     { id: "0482", spelling: "tool", pos: "명", meaning: "연장, 도구", emoji: "🛠️" },
     { id: "0483", spelling: "attack", pos: "동/명", meaning: "동 공격하다 명 공격", emoji: "⚔️" },
@@ -666,7 +666,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-26",
     name: "DAY 26",
-    words: [,
+    words: [
     { id: "0501", spelling: "action", pos: "명", meaning: "1 행동, 조치 2 행위, 동작", emoji: "🎬" },
     { id: "0502", spelling: "backward", pos: "부", meaning: "1 뒤로, 뒤쪽으로 2 (순서상) 거꾸로, 반대로", emoji: "↩️" },
     { id: "0503", spelling: "sore", pos: "형", meaning: "아픈, 따가운", emoji: "🤕" },
@@ -692,7 +692,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-27",
     name: "DAY 27",
-    words: [,
+    words: [
     { id: "0521", spelling: "pace", pos: "명", meaning: "1 속도 2 한 걸음, 보폭", emoji: "🏃" },
     { id: "0522", spelling: "compare", pos: "동", meaning: "1 비교하다, 견주다 2 비유하다", emoji: "⚖️" },
     { id: "0523", spelling: "cloth", pos: "명", meaning: "1 옷감 2 천, 헝겊", emoji: "🧵" },
@@ -718,7 +718,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-28",
     name: "DAY 28",
-    words: [,
+    words: [
     { id: "0541", spelling: "mild", pos: "형", meaning: "1 (정도가) 가벼운, 약한 2 (날씨가) 따뜻한 3 (사람이) 온화한", emoji: "🌤️" },
     { id: "0542", spelling: "absent", pos: "형", meaning: "결석한, 없는, 부재의", emoji: "🚫" },
     { id: "0543", spelling: "connect", pos: "동", meaning: "1 연결하다, 접속하다 2 관련시키다", emoji: "🔗" },
@@ -744,7 +744,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-29",
     name: "DAY 29",
-    words: [,
+    words: [
     { id: "0561", spelling: "brick", pos: "명", meaning: "벽돌", emoji: "🧱" },
     { id: "0562", spelling: "edge", pos: "명", meaning: "1 가장자리, 모서리 2 (칼 등의) 날", emoji: "📐" },
     { id: "0563", spelling: "chase", pos: "동", meaning: "뒤쫓다, 추적/추격하다", emoji: "🏃" },
@@ -770,7 +770,7 @@ export const DEFAULT_DAYS: Day[] = [
   {
     id: "day-30",
     name: "DAY 30",
-    words: [,
+    words: [
     { id: "0581", spelling: "forward", pos: "부", meaning: "앞쪽으로", emoji: "➡️" },
     { id: "0582", spelling: "track", pos: "명/동", meaning: "명 1 (밟아서 생긴) 길 2 자취, 흔적 동 추적하다", emoji: "🛤️" },
     { id: "0583", spelling: "choice", pos: "명", meaning: "1 선택(권) 2 선택(하는 행동)", emoji: "☑️" },
