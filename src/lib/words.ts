@@ -810,10 +810,38 @@ export function loadDays(): Day[] {
     const raw = localStorage.getItem(DAYS_KEY);
     if (!raw) return defaultDays();
     const parsed = JSON.parse(raw) as Day[];
-    return Array.isArray(parsed) && parsed.length ? parsed : defaultDays();
+    if (!Array.isArray(parsed) || !parsed.length) return defaultDays();
+    // 기존 저장본을 유지하면서, 새로 추가된 기본 DAY를 자동으로 병합한다.
+    const existingIds = new Set(parsed.map((d) => d.id));
+    const missing = DEFAULT_DAYS.filter((d) => !existingIds.has(d.id)).map((d) => ({
+      ...d,
+      words: [...d.words],
+    }));
+    const merged = [...parsed, ...missing];
+    // day-N 숫자 순으로 정렬 (그 외 id는 뒤로)
+    merged.sort((a, b) => {
+      const na = Number(a.id.replace(/^day-/, ""));
+      const nb = Number(b.id.replace(/^day-/, ""));
+      if (Number.isNaN(na) && Number.isNaN(nb)) return a.id.localeCompare(b.id);
+      if (Number.isNaN(na)) return 1;
+      if (Number.isNaN(nb)) return -1;
+      return na - nb;
+    });
+    if (missing.length) saveDays(merged);
+    return merged;
   } catch {
     return defaultDays();
   }
+}
+
+// dayId로 안전하게 한 DAY를 조회 (없으면 undefined)
+export function findDayById(days: Day[], dayId: string): Day | undefined {
+  return days.find((d) => d.id === dayId);
+}
+
+// 특정 DAY의 단어만 필터링해서 반환 (없으면 빈 배열)
+export function filterWordsByDayId(dayId: string): Word[] {
+  return findDayById(loadDays(), dayId)?.words ?? [];
 }
 
 export function saveDays(days: Day[]) {
